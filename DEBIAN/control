@@ -12,5 +12,5 @@ Description: Программа для проверки, является ли �
 
 Package: latin-square
 Architecture: amd64
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: g++, libc6
 Description: Проверка латинского квадрата
