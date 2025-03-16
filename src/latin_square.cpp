@@ -35,20 +35,16 @@ int main(int argc, char* argv[]) {
     int size = 0;
 
     if (argc > 1) {
-        // Если аргументы переданы в командной строке
-        istringstream ss(argv[1]);
-        string line;
-        while (getline(ss, line)) {
-            stringstream ssLine(line);
+        // Если аргументы переданы в командной строке, считываем их как строки матрицы
+        size = argc - 1;  // Количество строк = количество аргументов
+        for (int i = 1; i < argc; ++i) {
+            stringstream ss(argv[i]);
             vector<int> row;
             int num;
-            while (ssLine >> num) {
+            while (ss >> num) {
                 row.push_back(num);
             }
             matrix.push_back(row);
-            if (size == 0) {
-                size = row.size();
-            }
         }
     } else {
         // Если аргументы не переданы, запрашиваем ввод с клавиатуры
