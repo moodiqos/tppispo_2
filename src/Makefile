@@ -33,12 +33,6 @@ check_deps:
 	done; \
 	if [ -n "$$missing_pkgs" ]; then \
 		echo "Отсутствуют пакеты:$$missing_pkgs"; \
-		echo "Хотите установить их? [y/N]"; \
-		read ans; \
-		if [ "$$ans" = "y" ] || [ "$$ans" = "Y" ]; then \
-			sudo apt update && sudo apt install -y $$missing_pkgs; \
-		else \
-			echo "Не все зависимости установлены!"; \
-			exit 1; \
-		fi \
+		echo "Устанавливаем отсутствующие пакеты..."; \
+		sudo apt update && sudo apt install -y $$missing_pkgs; \
 	fi

@@ -1,4 +1,4 @@
-name: Build and Package Latin Square
+name: Build and Package Latin Square Programm
 
 on:
   pull_request:
