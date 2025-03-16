@@ -18,7 +18,6 @@ jobs:
 
       - name: Build the project
         run: |
-          cd src
           make
           make install
           make clean
