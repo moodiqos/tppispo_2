@@ -1,30 +1,24 @@
 CC=g++
 CFLAGS=-Wall -Wextra -std=c++17
 TARGET=latin_square
-DESTDIR=$(CURDIR)/debian/latin-square
-BINDIR=$(DESTDIR)/usr/bin
-REQUIRED_PKGS="g++ make debhelper"
-
-SRC_DIR=src
-SRC_FILE=$(SRC_DIR)/latin_square.cpp
+SRC_FILE=latin_square.cpp  # Без src/!
 
 all: check_deps $(TARGET)
 
 $(TARGET): $(SRC_FILE)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SRC_FILE)
 
-install: $(TARGET)
-	mkdir -p $(BINDIR)
-	cp $(TARGET) $(BINDIR)/
-	chmod +x $(BINDIR)/$(TARGET)  # Добавление команды chmod
-
 clean:
 	rm -f $(TARGET) *.o
-	rm -rf $(DESTDIR)
+
+install: $(TARGET)
+	mkdir -p ../usr/bin
+	cp $(TARGET) ../usr/bin/
+	chmod +x ../usr/bin/$(TARGET)  # Добавляем права на выполнение
 
 check_deps:
 	@missing_pkgs=""; \
-	for pkg in $(REQUIRED_PKGS); do \
+	for pkg in g++ make debhelper; do \
 		dpkg -s $$pkg >/dev/null 2>&1 || missing_pkgs="$$missing_pkgs $$pkg"; \
 	done; \
 	if [ -n "$$missing_pkgs" ]; then \
